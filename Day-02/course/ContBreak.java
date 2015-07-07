@@ -10,20 +10,20 @@ public class ContBreak {
 
      for(int i=2,j=2;i<=100;i++){
     	  for(;j<i;j++){
-    		  System.out.println("i = " + i + ", j = " + j + (i%j!=0));  
+ //   		  System.out.println("i = " + i + ", j = " + j + (i%j!=0));  
     		  if(i%j!=0) {
     			  continue;   
     		  }
     		  else {
-  			  System.out.println("else");  
+//     		  System.out.println("else");  
     			  break; 
     		  }
       	  }
-    	  System.out.println("到这里111");
+  //  	  System.out.println("到这里111");
     	  if(i==j){      // 根据i，j关系输出结果
     	  System.out.println(i);
     	  }
-    	  System.out.println("到这里222");
+  //  	  System.out.println("到这里222");
     	  j=2;           //j值初始化
     	  }
     	 
