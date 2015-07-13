@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TulingAPP</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="welcome_tip">
+        <item>hello</item>
+        <item>欢迎</item>
+        <item>welcome</item>
+        <item>你好</item>
+        <item>主人辛苦了</item>
+    </string-array>
+</resources>
