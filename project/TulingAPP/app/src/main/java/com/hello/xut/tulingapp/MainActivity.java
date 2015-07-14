@@ -12,7 +12,9 @@ import android.widget.ListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,11 +27,15 @@ public class MainActivity extends Activity implements HttpGetDataListener,View.O
      private String context_str;
      private TextAdapter adapter;
      private String[] welcome_array;
+
+     private long currentTime;
+     private long oldTime=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+
     }
     private void initView(){
         lists=new ArrayList<ListData>();
@@ -39,7 +45,7 @@ public class MainActivity extends Activity implements HttpGetDataListener,View.O
         sendButton.setOnClickListener(this);
         adapter=new TextAdapter(lists,this);
         lv.setAdapter(adapter);
-        ListData listData=new ListData(getRandomWelcomeTips(),ListData.RECEIVER);
+        ListData listData=new ListData(getRandomWelcomeTips(),ListData.RECEIVER,getTime());
         lists.add(listData);
 
     }
@@ -54,7 +60,7 @@ public class MainActivity extends Activity implements HttpGetDataListener,View.O
 
     @Override
     public void getDataUrl(String data) {
-        System.out.println(data);
+//        System.out.println(data);
         parseText(data);
     }
     public void parseText(String str){
@@ -62,14 +68,25 @@ public class MainActivity extends Activity implements HttpGetDataListener,View.O
             JSONObject jb=new JSONObject(str);
 //            System.out.println(jb.getString("code"));
 //            System.out.println(jb.getString("text"));
-            ListData listData=new ListData(jb.getString("text"),ListData.RECEIVER);
+            ListData listData=new ListData(jb.getString("text"),ListData.RECEIVER,getTime());
             lists.add(listData);
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
+    public String getTime(){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日HH:mm:ss");
+        Date curData=new Date();
+        String string=sdf.format(curData);
+        currentTime=System.currentTimeMillis();
+        if(currentTime-oldTime>=5*60*1000){
+            oldTime=currentTime;
+            return string;
+        }else {
+            return "";
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -95,9 +112,13 @@ public class MainActivity extends Activity implements HttpGetDataListener,View.O
 
     @Override
     public void onClick(View v) {
+        getTime();
         context_str=sendText.getText().toString();
-        mHttpData=(HttpData) new HttpData("http://www.tuling123.com/openapi/api?key=30300060386df68316cb66e15b8a930b&info="+context_str,this).execute();
-        ListData listData=new ListData(context_str,ListData.SEND);
+        sendText.setText("");
+        String a=context_str.replace(" ","");
+        String str=a.replace("\n","");
+        mHttpData=(HttpData) new HttpData("http://www.tuling123.com/openapi/api?key=30300060386df68316cb66e15b8a930b&info="+str,this).execute();
+        ListData listData=new ListData(context_str,ListData.SEND,getTime());
         lists.add(listData);
         adapter.notifyDataSetChanged();
     }

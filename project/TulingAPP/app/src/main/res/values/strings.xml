@@ -4,10 +4,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string-array name="welcome_tip">
-        <item>hello</item>
-        <item>欢迎</item>
-        <item>welcome</item>
-        <item>你好</item>
+        <item>好久不见!</item>
+        <item>你可来了，想死我了</item>
+        <item>Welcome</item>
+        <item>你好...</item>
         <item>主人辛苦了</item>
+        <item>欢迎小主回宫</item>
+        <item>I Miss You</item>
     </string-array>
 </resources>

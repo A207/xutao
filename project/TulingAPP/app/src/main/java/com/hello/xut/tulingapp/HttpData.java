@@ -21,7 +21,7 @@ import java.nio.Buffer;
 public class HttpData extends AsyncTask<String,Void,String>{
      private HttpClient mHttpClient;
      private HttpGet mHttpGet;
-     private HttpResponse mHttpRosponse;
+     private HttpResponse mHttpResponse;
      private HttpEntity mHttpEntity;
      private InputStream in;
      private String url;
@@ -35,8 +35,8 @@ public class HttpData extends AsyncTask<String,Void,String>{
         try {
             mHttpClient=new DefaultHttpClient();
             mHttpGet=new HttpGet(url);
-            mHttpRosponse=mHttpClient.execute(mHttpGet);
-            mHttpEntity=mHttpRosponse.getEntity();
+            mHttpResponse=mHttpClient.execute(mHttpGet);
+            mHttpEntity=mHttpResponse.getEntity();
             in=mHttpEntity.getContent();
             BufferedReader br=new BufferedReader(new InputStreamReader(in));
             String line=null;

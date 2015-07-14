@@ -16,10 +16,11 @@ import java.util.List;
 public class TextAdapter extends BaseAdapter{
     private List<ListData>  lists;
     private Context context;
-    RelativeLayout layout=new RelativeLayout(context);
+    RelativeLayout layout;
     public TextAdapter(List<ListData> lists,Context context){
         this.lists=lists;
         this.context=context;
+        layout=new RelativeLayout(context);
 
     }
     @Override
@@ -48,7 +49,8 @@ public class TextAdapter extends BaseAdapter{
         }
         TextView tView=(TextView)layout.findViewById(R.id.tv);
         tView.setText(lists.get(position).getContent());
-
+         TextView time= (TextView) layout.findViewById(R.id.time);
+        time.setText(lists.get(position).getTime());
         return layout;
     }
 }
