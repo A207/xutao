@@ -16,14 +16,19 @@
         android:gravity="center_horizontal"
         android:layout_toLeftOf="@id/iv"/>
     <TextView
+        android:layout_width="10sp"
+        android:layout_height="20sp"
+        android:id="@+id/blank"
+        android:layout_toLeftOf="@id/iv"
+        android:layout_below="@id/time"/>
+    <TextView
         android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50sp"
         android:layout_toLeftOf="@id/iv"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/right"
         android:gravity="center"
         android:textSize="20sp"
-        android:layout_alignBottom="@id/iv" />
+        android:layout_below="@id/blank" />
 </RelativeLayout>

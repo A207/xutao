@@ -29,7 +29,7 @@ public class PageTurn extends MainActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
-        handler.sendEmptyMessageDelayed(1,6000);
+        handler.sendEmptyMessageDelayed(1,3000);
     }
 
 }

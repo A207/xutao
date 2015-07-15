@@ -1,17 +1,26 @@
 package com.hello.xut.tulingapp;
 
 import android.app.Activity;
+import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PictureDrawable;
+import android.media.Image;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +36,13 @@ public class MainActivity extends Activity implements HttpGetDataListener,View.O
      private String context_str;
      private TextAdapter adapter;
      private String[] welcome_array;
-
+     private ImageButton cClick;
+     private View mian;
+     private int currentImage=0;
+     private int[] images={R.drawable.back5,R.drawable.back4,R.drawable.back3, R.drawable.background1,
+             R.drawable.background3,R.drawable.background4,
+             R.drawable.background5, R.drawable.background6,R.drawable.background7,
+             R.drawable.background8,R.drawable.background9,R.drawable.background10};
      private long currentTime;
      private long oldTime=0;
     @Override
@@ -35,7 +50,14 @@ public class MainActivity extends Activity implements HttpGetDataListener,View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-
+        cClick= (ImageButton) findViewById(R.id.cClick);
+        mian=(View)findViewById(R.id.mian);
+        cClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             mian.setBackgroundResource(images[++currentImage%images.length]);
+            }
+        });
     }
     private void initView(){
         lists=new ArrayList<ListData>();
@@ -117,9 +139,16 @@ public class MainActivity extends Activity implements HttpGetDataListener,View.O
         sendText.setText("");
         String a=context_str.replace(" ","");
         String str=a.replace("\n","");
+        if(str.isEmpty()) {
+            Toast.makeText(MainActivity.this,"请输入内容",Toast.LENGTH_SHORT).show();
+        }
+        else {
         mHttpData=(HttpData) new HttpData("http://www.tuling123.com/openapi/api?key=30300060386df68316cb66e15b8a930b&info="+str,this).execute();
+
         ListData listData=new ListData(context_str,ListData.SEND,getTime());
         lists.add(listData);
         adapter.notifyDataSetChanged();
+        }
     }
+
 }
