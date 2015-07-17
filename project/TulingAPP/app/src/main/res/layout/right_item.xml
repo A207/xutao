@@ -30,5 +30,7 @@
         android:background="@drawable/right"
         android:gravity="center"
         android:textSize="20sp"
-        android:layout_below="@id/blank" />
+        android:layout_below="@id/blank"
+        android:autoLink="all"
+        ></TextView>
 </RelativeLayout>

@@ -28,14 +28,15 @@
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="请输入内容" />
+            android:hint="请输入内容"
+            />
         <Button
             android:id="@+id/sendBtn"
             android:layout_width="60sp"
             android:layout_height="40sp"
             android:text="发送"
             android:background="@drawable/sendbutton"
-            android:shadowRadius="1.5"
+            android:shadowRadius="5"
             android:shadowColor="#000000"
             android:textColor="#ffffff"/>
     </LinearLayout>
